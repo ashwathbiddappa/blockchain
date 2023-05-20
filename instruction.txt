@@ -1,0 +1,35 @@
+the below solution is to deploy a private blockchain with 5 validator . here we are using cloud aws , container docker , iac terraform , monitoring cloud and for one click deployment jenkins 
+
+1. creating a 5 diffrent container 
+in which each validator hosting geth would run in a seprate container 
+build the image and push it to repository for example ecr repository 
+
+
+a) we can deploy 5 container in a single ecs cluster 
+. create an ecs cluster by specifiying name and configuration setting 
+. defining a task defination by mentioning image name and network  setting , variables and resource 
+. creating a service that manages deplyoment and scaling of the container 
+. launching ec2 instance with desired configuration to host the container with proper resource 
+. setting up the load balancer 
+. we can set up auto scalling group
+
+b) we can deploy 5 container in a diffrent ecs cluster 
+.create 5 vpc defining cidr block and subnets an deach each network wont overlap 
+.create 5 diffrent ecs cluster by defining task , create servicses and we need to host each ecs cluster in each vpc
+.create vpc peering so that each ecs cluster are connected to each other 
+. setting up the load balancer 
+
+2. provisoning the infrasructure 
+
+. create terraform script tat pulls the images from ecr and deploy it in ecs cluster as per requirment 
+. create a vpc network 
+. create security group and attach it to the vpc created
+
+3. monitoring 
+
+. create a dashoard in cloud watch for ecs cluster and for other resource 
+. create alerts so that we can manage or ecs clusters
+
+4. deployment 
+
+. can deploy using ci/cd by using pipeline script 
